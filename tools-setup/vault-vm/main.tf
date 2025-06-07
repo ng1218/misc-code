@@ -51,7 +51,7 @@ resource "azurerm_network_interface_security_group_association" "nsg-attach" {
   network_security_group_id = "/subscriptions/1c8859e3-276f-40f1-afc9-1dd8f8dc18d7/resourceGroups/raghuproject_resources/providers/Microsoft.Network/networkSecurityGroups/allow-all-test"
 }
 
-resource "azurerm_dns_a_record" "dns_record_resource_group" {
+resource "azurerm_dns_a_record" "dns_record_public" {
   name                  = "${var.name}-dev"
   zone_name             = "nareshdevops1218.online"
   resource_group_name   = var.resource_group_name
@@ -59,7 +59,7 @@ resource "azurerm_dns_a_record" "dns_record_resource_group" {
   records               = [publicazurerm_public_ip.public_ip.public_ip_address_id]
 }
 
-resource "azurerm_dns_a_record" "dns_record_resource_group" {
+resource "azurerm_dns_a_record" "dns_record_private" {
   name                  = "${var.name}-int"
   zone_name             = "nareshdevops1218.online"
   resource_group_name   = var.resource_group_name

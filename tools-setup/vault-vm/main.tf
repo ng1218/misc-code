@@ -56,7 +56,7 @@ resource "azurerm_dns_a_record" "dns_record_public" {
   zone_name             = "nareshdevops1218.online"
   resource_group_name   = var.resource_group_name
   ttl                   = 3
-  records               = [publicazurerm_public_ip.public_ip.public_ip_address_id]
+  records               = [azurerm_public_ip.public_ip.ip_address]
 }
 
 resource "azurerm_dns_a_record" "dns_record_private" {

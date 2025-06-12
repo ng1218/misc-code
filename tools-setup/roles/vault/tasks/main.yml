@@ -7,3 +7,8 @@
   ansible.builtin.dnf:
     name: vault
     state: installed
+
+- name: Copy vault config file
+  ansible.builtin.copy:
+    src: vault.hcl
+    dest: /etc/vault.d/vault.hcl

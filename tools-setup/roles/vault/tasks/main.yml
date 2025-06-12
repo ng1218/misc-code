@@ -12,3 +12,9 @@
   ansible.builtin.copy:
     src: vault.hcl
     dest: /etc/vault.d/vault.hcl
+
+- name: Start vault
+  ansible.builtin.systemd_service:
+    name: vault
+    status: started
+    enabled: true

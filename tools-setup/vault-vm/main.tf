@@ -18,6 +18,7 @@ resource "azurerm_public_ip" public_ip {
   allocation_method       = "Static"
 }
 
+###### MOVED TO SPOT VM CREATION ###############
 resource "azurerm_virtual_machine" "vm" {
   name                  = var.name
   location              = var.location
@@ -45,6 +46,29 @@ resource "azurerm_virtual_machine" "vm" {
     disable_password_authentication = false
   }
 }
+
+
+# resource "azurerm_linux_virtual_machine" "vm" {
+#   name                  = var.name
+#   location              = var.location
+#   resource_group_name   = var.resource_group_name
+#   size                  = var.vm_size
+#   admin_username        = "adminuser"
+#   admin_password        = "devops@123456" 
+#   network_interface_ids = [azurerm_network_interface.privateip.id]
+
+#   os_disk {
+#     caching              = "ReadWrite"
+#     storage_account_type = "Standard_LRS"
+#   }
+
+#   source_image_id           = "/subscriptions/1c8859e3-276f-40f1-afc9-1dd8f8dc18d7/resourceGroups/myfirstvm_group/providers/Microsoft.Compute/images/local-devops-practice"
+#   priority                  = "Spot"
+#   eviction_policy           = "Deallocate"
+#   max_bid_price             = -1 
+# }
+
+
 
 resource "azurerm_network_interface_security_group_association" "nsg-attach" {
   network_interface_id      = azurerm_network_interface.privateip.id

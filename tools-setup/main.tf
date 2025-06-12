@@ -7,6 +7,6 @@ module "vault" {
   vm_size               = each.value["vm_size"]
 }
 
-output "name" {
+output "vault" {
   value = module.vault
 }

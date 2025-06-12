@@ -77,6 +77,7 @@ resource "azurerm_network_interface_security_group_association" "nsg-attach" {
 }
 
 resource "azurerm_dns_a_record" "dns_record_public" {
+  depends_on            = [azurerm_linux_virtual_machine.vm  ]
   name                  = var.name
   zone_name             = "nareshdevops1218.online"
   resource_group_name   = var.resource_group_name

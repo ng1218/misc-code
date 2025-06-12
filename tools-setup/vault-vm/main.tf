@@ -57,6 +57,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   admin_username        = "adminuser"
   admin_password        = "devops@123456" 
   network_interface_ids = [azurerm_network_interface.privateip.id]
+  disable_password_authentication = false
 
   os_disk {
     caching              = "ReadWrite"

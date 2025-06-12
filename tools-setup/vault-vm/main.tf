@@ -87,6 +87,7 @@ resource "azurerm_network_interface_security_group_association" "nsg-attach" {
 # }
 
 resource "azurerm_dns_a_record" "dns_record_private" {
+  depends_on            = [azurerm_linux_virtual_machine.vm  ]
   name                  = "${var.name}-int"
   zone_name             = "nareshdevops1218.online"
   resource_group_name   = var.resource_group_name
@@ -95,5 +96,5 @@ resource "azurerm_dns_a_record" "dns_record_private" {
 }
 
 output "name" {
-  value = azurerm_linux_virtual_machine.vm
+  value = azurerm_public_ip.public_ip
 }

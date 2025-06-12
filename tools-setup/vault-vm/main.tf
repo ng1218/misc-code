@@ -77,14 +77,14 @@ resource "azurerm_network_interface_security_group_association" "nsg-attach" {
   network_security_group_id = "/subscriptions/1c8859e3-276f-40f1-afc9-1dd8f8dc18d7/resourceGroups/raghuproject_resources/providers/Microsoft.Network/networkSecurityGroups/allow-all-test"
 }
 
-# resource "azurerm_dns_a_record" "dns_record_public" {
-#   depends_on            = [azurerm_linux_virtual_machine.vm  ]
-#   name                  = var.name
-#   zone_name             = "nareshdevops1218.online"
-#   resource_group_name   = var.resource_group_name
-#   ttl                   = 3
-#   records               = [azurerm_public_ip.public_ip.ip_address]
-# }
+resource "azurerm_dns_a_record" "dns_record_public" {
+  depends_on            = [azurerm_linux_virtual_machine.vm  ]
+  name                  = var.name
+  zone_name             = "nareshdevops1218.online"
+  resource_group_name   = var.resource_group_name
+  ttl                   = 3
+  records               = [azurerm_public_ip.public_ip.ip_address]
+}
 
 resource "azurerm_dns_a_record" "dns_record_private" {
   depends_on            = [azurerm_linux_virtual_machine.vm  ]
@@ -93,8 +93,4 @@ resource "azurerm_dns_a_record" "dns_record_private" {
   resource_group_name   = var.resource_group_name
   ttl                   = 3
   records               = [azurerm_network_interface.privateip.private_ip_address]
-}
-
-output "name" {
-  value = azurerm_public_ip.public_ip
 }

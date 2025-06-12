@@ -95,5 +95,5 @@ resource "azurerm_dns_a_record" "dns_record_private" {
 }
 
 output "name" {
-  value = azurerm_dns_a_record.dns_record_private
+  value = azurerm_linux_virtual_machine.vm
 }

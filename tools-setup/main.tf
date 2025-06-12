@@ -6,3 +6,7 @@ module "vault" {
   location              = var.location
   vm_size               = each.value["vm_size"]
 }
+
+output "name" {
+  value = module.vault
+}

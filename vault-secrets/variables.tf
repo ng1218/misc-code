@@ -14,14 +14,18 @@ variable "secret_engines" {
 
 variable "secret_values" {
     default = {
-        secret_engine = "roboshop-dev"
-        secret_values = {
+      cart = {
+          secret_engine = "roboshop-dev"
+          secret_values = {
           foo = "test"
+          }
         }
-        secret_engine = "roboshop-infra"
-        secret_values = {
-            username = "azuser"
-            password = "devops@123456"
+        ssh = {
+          secret_engine = "roboshop-infra"
+          secret_values = {
+              username = "azuser"
+              password = "devops@123456"
+          }
         }
     }
 }

@@ -8,7 +8,10 @@ variable "secret_engines" {
     default = {
         roboshop-dev = {
            description = "Secret engine for robshop dev"
-        }      
+        }  
+        roboshop-infra = {
+          description = "Secret engine for robshop dev"
+        }     
     }
 }
 

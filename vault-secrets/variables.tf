@@ -6,6 +6,8 @@ variable "secret_engines" {
     }
 }
 
+variable "token" {}
+
 variable "vault_address" {
   default  = "https://vault.nareshdevops1218.online:8200"
 }

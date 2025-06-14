@@ -1,5 +1,6 @@
 provider "vault" {
-  address = var.vault_address
+  address   = var.vault_address
+  token     = var.token
 }
 
 terraform {

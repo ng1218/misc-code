@@ -1,3 +1,9 @@
+variable "token" {}
+
+variable "vault_address" {
+  default  = "http://vault.nareshdevops1218.online:8200"
+}
+
 variable "secret_engines" {
     default = {
         roboshop-dev = {
@@ -6,8 +12,16 @@ variable "secret_engines" {
     }
 }
 
-variable "token" {}
-
-variable "vault_address" {
-  default  = "http://vault.nareshdevops1218.online:8200"
+variable "secret_values" {
+    default = {
+        secret_engine = "roboshop-dev"
+        secret_values = {
+          foo = "test"
+        }
+        secret_engine = "roboshop-infra"
+        secret_values = {
+            username = "azuser"
+            password = "devops@123456"
+        }
+    }
 }

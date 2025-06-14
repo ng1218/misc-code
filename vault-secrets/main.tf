@@ -6,19 +6,14 @@ resource "vault_mount" "secrets" {
     description = each.value["description"]
 }
 
-# resource "vault_kv_secret_v2" "secretvalues" {
-#     depends_on          = vault_mount.secrets
-#     for_each            = var.secret_engines 
-#     mount               = each.key
-#     name                = each.value["secret_name"]
-#     delete_all_versions = true
-#     data_json = jsonencode(
-#         {
-#             username = "azuser",
-#             password = "devops@123456"
-#         }
-#     )
-# }
+resource "vault_kv_secret_v2" "secretvalues" {
+    depends_on          = vault_mount.secrets
+    for_each            = var.secret_values 
+    mount               = vault_mount.secrets.path
+    name                = each.value["secret_engine"]
+    delete_all_versions = false
+    data_json           = jsonencode(each.value["secret_values"])
+}
 
 # data "vault_kv_secret_v2" "example" {
 #   mount = vault_mount.kvv2.path

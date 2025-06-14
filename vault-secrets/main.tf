@@ -7,7 +7,7 @@ resource "vault_mount" "secrets" {
 }
 
 resource "vault_kv_secret_v2" "secretvalues" {
-    depends_on          = vault_mount.secrets
+    depends_on          = [ vault_mount.secrets ]
     for_each            = var.secret_values 
     mount               = vault_mount.secrets.path
     name                = each.value["secret_engine"]

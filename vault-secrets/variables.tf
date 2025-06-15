@@ -74,7 +74,7 @@ variable "secret_values" {
               MONGO_URL="mongodb://mongodb-dev.nareshdevops1218.online:27017/users"
           }
         }
-        user = {
+        mysql = {
           secret_engine = "roboshop-dev"
           secret_values = {
               root_password="RoboShop@1"

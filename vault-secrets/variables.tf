@@ -20,7 +20,15 @@ variable "secret_values" {
       cart = {
           secret_engine = "roboshop-dev"
           secret_values = {
-          foo = "test"
+            REDIS_HOST="redis-dev.nareshdevops1218.online"
+            CATALOGUE_HOST="catalogue-dev.nareshdevops1218.online"
+            CATALOGUE_PORT="8080"
+          }
+        }
+        catalogue = {
+          secret_engine = "roboshop-dev"
+          secret_values = {
+            MONGO_URL="mongodb://mongodb-dev.nareshdevops1218.online:27017/catalogue"
           }
         }
         ssh = {
@@ -40,5 +48,32 @@ variable "secret_values" {
               payment_url = "http://payment-dev.nareshdevops1218.online:8080/"
           }
         }
+        payment = {
+          secret_engine = "roboshop-dev"
+          secret_values = {
+              CART_HOST="cart-dev.nareshdevops1218.online"
+              CART_PORT="8080"
+              USER_HOST="user-dev.nareshdevops1218.online"
+              USER_PORT="8080"
+              AMQP_HOST="rabbitmq-dev.nareshdevops1218.online"
+              AMQP_USER="roboshop"
+              AMQP_PASS="roboshop123"
+          }
+        }
+        shipping = {
+          secret_engine = "roboshop-dev"
+          secret_values = {
+              CART_ENDPOINT="cart-dev.nareshdevops1218.online:8080"
+              DB_HOST="mysql-dev.nareshdevops1218.online:8080"
+          }
+        }
+        user = {
+          secret_engine = "roboshop-dev"
+          secret_values = {
+              REDIS_URL="redis://redis-dev.nareshdevops1218.online:6379"
+              MONGO_URL="mongodb://mongodb-dev.nareshdevops1218.online:27017/users"
+          }
+        }
+       
     }
 }

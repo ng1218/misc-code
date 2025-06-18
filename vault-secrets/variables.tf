@@ -29,6 +29,10 @@ variable "secret_values" {
           secret_engine = "roboshop-dev"
           secret_values = {
             MONGO_URL="mongodb://mongodb-dev.nareshdevops1218.online:27017/catalogue"
+            DB_HOST="mongodb-dev.nareshdevops1218.online"
+            DB_TYPE="mongo"
+            APP_GIT_URL="https://github.com/roboshop-devops-project-v3/catalogue"
+            SCHEMA_FILE="db/master-data.js"
           }
         }
         ssh = {
@@ -46,6 +50,16 @@ variable "secret_values" {
               cart_url = "http://cart-dev.nareshdevops1218.online:8080/"
               shipping_url = "http://shipping-dev.nareshdevops1218.online:8080/"
               payment_url = "http://payment-dev.nareshdevops1218.online:8080/"
+              CATALOGUE_HOST = "catalogue-dev.nareshdevops1218.online"
+              CATALOGUE_PORT = 8080
+              USER_HOST      = "user-dev.nareshdevops1218.online"
+              USER_PORT      = 8080
+              CART_HOST      = "cart-dev.nareshdevops1218.online"
+              CART_PORT      = 8080
+              SHIPPING_HOST  = "shipping-dev.nareshdevops1218.online"
+              SHIPPING_PORT  = 8080
+              PAYMENT_HOST   = "payment-dev.nareshdevops1218.online"
+              PAYMENT_PORT   = 8080
           }
         }
         payment = {
@@ -64,7 +78,13 @@ variable "secret_values" {
           secret_engine = "roboshop-dev"
           secret_values = {
               CART_ENDPOINT="cart-dev.nareshdevops1218.online:8080"
-              DB_HOST="mysql-dev.nareshdevops1218.online:8080"
+              DB_HOST="mysql-dev.nareshdevops1218.online"
+              DB_TYPE="mysql"
+              APP_GIT_URL="https://github.com/roboshop-devops-project-v3/shipping"
+              DB_USER="root"
+              DB_PASS="RoboShop@1"
+              username="root"
+              password="RoboShop@1"
           }
         }
         user = {

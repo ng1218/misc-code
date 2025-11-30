@@ -3,7 +3,7 @@ variable "name" {
 }
 
 variable "resource_group_name" {
-  default = "myfirstvm_group"
+  default = "ngresources"
 }
 
 variable "location" {

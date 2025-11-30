@@ -4,7 +4,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_storage_account" "example" {
-  name                     = "nareshdevops"
+  name                     = "nareshdevops1"
   resource_group_name      = "ngresources"
   location                 = "UK West"
   account_tier             = "Standard"

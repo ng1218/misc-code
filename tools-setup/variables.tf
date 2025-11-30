@@ -13,7 +13,7 @@ variable "location" {
 variable "tools" {
     default = {
         vault = {
-            vm_size = "Standard_F1s"
+            vm_size = "Standard_B2ats_v2"
         }
     } 
 }

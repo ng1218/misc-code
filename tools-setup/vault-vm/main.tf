@@ -54,8 +54,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
   location              = var.location
   resource_group_name   = var.resource_group_name
   size                  = var.vm_size
-  admin_username        = "adminuser"
-  admin_password        = "devops@123456" 
+  admin_username        = "azuser"
+  admin_password        = "devops@12345"
   network_interface_ids = [azurerm_network_interface.privateip.id]
   disable_password_authentication = false
 

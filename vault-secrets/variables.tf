@@ -104,6 +104,7 @@ variable "secret_values" {
           secret_engine = "roboshop-dev"
           secret_values = {
             USER_NAME="roboshop"
+            PASSWORD="roboshop123"
           }
         }
     }

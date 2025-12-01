@@ -52,15 +52,15 @@ variable "secret_values" {
               shipping_url = "http://shipping-dev.nareshdevops1218.online:8080/"
               payment_url = "http://payment-dev.nareshdevops1218.online:8080/"
               CATALOGUE_HOST = "catalogue-dev.nareshdevops1218.online"
-              CATALOGUE_PORT = 8080
+              CATALOGUE_PORT = "8080"
               USER_HOST      = "user-dev.nareshdevops1218.online"
-              USER_PORT      = 8080
+              USER_PORT      = "8080"
               CART_HOST      = "cart-dev.nareshdevops1218.online"
-              CART_PORT      = 8080
+              CART_PORT      = "8080"
               SHIPPING_HOST  = "shipping-dev.nareshdevops1218.online"
-              SHIPPING_PORT  = 8080
+              SHIPPING_PORT  = "8080"
               PAYMENT_HOST   = "payment-dev.nareshdevops1218.online"
-              PAYMENT_PORT   = 8080
+              PAYMENT_PORT   = "8080"
           }
         }
         payment = {

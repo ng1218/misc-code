@@ -100,6 +100,11 @@ variable "secret_values" {
               root_password="RoboShop@1"
           }
         }
-       
+      rabbitmq = {
+          secret_engine = "roboshop-dev"
+          secret_values = {
+            USER_NAME="roboshop"
+          }
+        }
     }
 }

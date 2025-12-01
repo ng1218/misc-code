@@ -28,6 +28,7 @@ variable "secret_values" {
         catalogue = {
           secret_engine = "roboshop-dev"
           secret_values = {
+            MONGO="true"
             MONGO_URL="mongodb://mongodb-dev.nareshdevops1218.online:27017/catalogue"
             DB_HOST="mongodb-dev.nareshdevops1218.online"
             DB_TYPE="mongo"
@@ -90,6 +91,7 @@ variable "secret_values" {
         user = {
           secret_engine = "roboshop-dev"
           secret_values = {
+              MONGO="true"
               REDIS_URL="redis://redis-dev.nareshdevops1218.online:6379"
               MONGO_URL="mongodb://mongodb-dev.nareshdevops1218.online:27017/users"
           }

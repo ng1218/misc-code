@@ -50,6 +50,7 @@ resource "azurerm_public_ip" public_ip {
 
 
 resource "azurerm_linux_virtual_machine" "vm" {
+  count                 = var.spot ? 1 : 0
   name                  = var.name
   location              = var.location
   resource_group_name   = var.resource_group_name
@@ -70,7 +71,24 @@ resource "azurerm_linux_virtual_machine" "vm" {
   max_bid_price             = -1 
 }
 
+resource "azurerm_linux_virtual_machine" "nonspot" {
+  count                 = var.spot ? 0 : 1
+  name                  = var.name
+  location              = var.location
+  resource_group_name   = var.resource_group_name
+  size                  = var.vm_size
+  admin_username        = "azuser"
+  admin_password        = "devops@12345"
+  network_interface_ids = [azurerm_network_interface.privateip.id]
+  disable_password_authentication = false
 
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_id           = "/subscriptions/ddffee8a-e239-4aa1-b7e0-b88ff5a2f9aa/resourceGroups/ngresources/providers/Microsoft.Compute/images/local-devops-practice"
+}
 
 resource "azurerm_network_interface_security_group_association" "nsg-attach" {
   network_interface_id      = azurerm_network_interface.privateip.id

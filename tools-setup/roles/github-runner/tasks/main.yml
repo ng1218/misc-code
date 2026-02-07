@@ -1,20 +1,21 @@
-- name: Download and install docker
+- name: Download repo file
   ansible.builtin.get_url:
     url: https://download.docker.com/linux/rhel/docker-ce.repo
     dest: /etc/yum.repos.d/docker-ce.repo
 
-- name: Install docker
+- name: Install Docker
   ansible.builtin.dnf:
     name: docker-ce
     state: installed
 
-- name: Start docker
+- name: Start Docker
   ansible.builtin.systemd_service:
     name: docker
-    state: started
-    enabled: true
+    state: restarted
+    enabled: yes
+    daemon-reload: yes
 
-- name: Create a docker container
+- name: Create Runner Containers
   loop:
     - runner-1
     - runner-2
@@ -22,10 +23,11 @@
   community.docker.docker_container:
     name: "{{ item }}"
     image: ng1218/github-runner
-    state: present
-    recreate: true
     pull: always
+    state: started
+    restart: true
+    restart_policy: always
     env:
-      ORG: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-infra/data/github-runner:ORG token={{ token }} url=http://vault.nareshdevops1218.online:8200') }}"
-      TOKEN: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-infra/data/github-runner:TOKEN token={{ token }} url=http://vault.nareshdevops1218.online:8200') }}"
+      ORG: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-infra/data/github-runner:ORG token={{ token }} url=http://vault-int.nareshdevops1218.online:8200') }}"
+      TOKEN: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-infra/data/github-runner:TOKEN token={{ token }} url=http://vault-int.nareshdevops1218.online:8200') }}"
 

@@ -30,4 +30,4 @@
     env:
       ORG: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-infra/data/github-runner:ORG token={{ token }} url=http://vault-int.nareshdevops1218.online:8200') }}"
       TOKEN: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-infra/data/github-runner:TOKEN token={{ token }} url=http://vault-int.nareshdevops1218.online:8200') }}"
-
+      NAME: "{{ item }}"

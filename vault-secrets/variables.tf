@@ -46,7 +46,7 @@ variable "secret_values" {
           ORG = "https://github.com/nareshgdevops"
           TOKEN = "BRBUG62D3JRR6Q6VAU273ZTJTKQ6M"
         }
-        github-runner = {
+        azure-service-priniciple = {
           AZURE_SUBSCRIPTION_ID = "ddffee8a-e239-4aa1-b7e0-b88ff5a2f9aa"
           AZURE_CLIENT_ID = "8768f208-196c-4d2d-b46a-c5f21196749b"
           AZURE_SECRET = "qTZ8Q~z.0eer6FcAIpC_w77f6betViQa5bYN5c_R"

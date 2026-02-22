@@ -45,12 +45,6 @@ variable "secret_values" {
         github-runner = {
           ORG = "https://github.com/nareshgdevops"
         }
-        azure-service-priniciple = {
-          AZURE_SUBSCRIPTION_ID = "ddffee8a-e239-4aa1-b7e0-b88ff5a2f9aa"
-          AZURE_CLIENT_ID = "8768f208-196c-4d2d-b46a-c5f21196749b"
-          AZURE_SECRET = "Z~C8Q~OMNiNh-re8FWWa6mriAr9ji9wbavYeCcjk"
-          AZURE_TENANT = "a9c314e0-1e86-4d94-a505-62afc24fe8b7"
-        }
 
         frontend = {
           secret_engine = "roboshop-dev"

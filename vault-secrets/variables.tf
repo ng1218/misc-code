@@ -42,10 +42,6 @@ variable "secret_values" {
               password = "devops@123456"
           }
         }
-        github-runner = {
-          ORG = "https://github.com/nareshgdevops"
-        }
-
         frontend = {
           secret_engine = "roboshop-dev"
           secret_values = {

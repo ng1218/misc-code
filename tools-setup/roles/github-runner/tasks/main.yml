@@ -40,3 +40,4 @@
       AZURE_CLIENT_ID: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-infra/data/azure-service-priniciple:AZURE_CLIENT_ID token={{ token }} url=http://vault-int.nareshdevops1218.online:8200') }}"
       AZURE_SECRET: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-infra/data/azure-service-priniciple:AZURE_SECRET token={{ token }} url=http://vault-int.nareshdevops1218.online:8200') }}"
       AZURE_TENANT: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-infra/data/azure-service-priniciple:AZURE_TENANT token={{ token }} url=http://vault-int.nareshdevops1218.online:8200') }}"
+

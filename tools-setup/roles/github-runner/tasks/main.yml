@@ -24,6 +24,28 @@
   delegate_to: localhost
   register: gh_org_token
 
+- name: Create override directory for docker socket
+  ansible.builtin.file:
+    path: /etc/systemd/system/docker.socket.d
+    state: directory
+    mode: '0755'
+
+- name: Set custom socket permissions
+  ansible.builtin.copy:
+    dst: /etc/systemd/system/docker.socket.d/override.conf
+    content: |
+      [Socket]
+      SocketMode=0666
+
+- name: Enable and start app service
+  ansible.builtin.systemd_service:
+    name: "{{ item }}"
+    state: restarted
+    daemon_reload: true
+  loop:
+    - docker.socket
+    - docker
+
 - name: Create Runner Containers
   loop:
     - runner-1

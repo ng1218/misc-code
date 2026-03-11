@@ -42,6 +42,25 @@ variable "secret_values" {
               password = "devops@123456"
           }
         }
+
+        azure-service-priniciple = {
+            secret_engine = "roboshop-infra"
+            secret_values = {
+              AZURE_TENANT = "a9c314e0-1e86-4d94-a505-62afc24fe8b7"
+              AZURE_SUBSCRIPTION_ID = "ddffee8a-e239-4aa1-b7e0-b88ff5a2f9aa"
+              AZURE_CLIENT_ID = "8768f208-196c-4d2d-b46a-c5f21196749b"
+              AZURE_SECRET = ""
+            }
+          }
+
+        github-runner = {
+          secret_engine = "roboshop-infra"
+          secret_values = {
+            ORG = "https://github.com/nareshgdevops"
+            TOKEN = "BRBUG62D3JRR6Q6VAU273ZTJTKQ6M"
+          }
+        }
+
         frontend = {
           secret_engine = "roboshop-dev"
           secret_values = {

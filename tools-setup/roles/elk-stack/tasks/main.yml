@@ -1,7 +1,7 @@
-- name: Copy elastic search repo
+- name: Copy Elastic repo file
   ansible.builtin.template:
-    src: elasticsearch.repo
-    dst: /etc/yum.repos.d/elasticsearch.repo
+    src: elastic.repo
+    dest: /etc/yum.repos.d/elastic.repo
 
 - name: Install ELK
   ansible.builtin.dnf:

@@ -25,7 +25,7 @@ variable "tools" {
           spot = false
         }*/
         sonarqube = {
-          vm_size = "Standard_B2als_v2"
+          vm_size = "Standard_D2ls_v5"
           spot = false
         }
     } 

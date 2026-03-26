@@ -1,10 +1,9 @@
 #wget https://releases.jfrog.io/artifactory/artifactory-rpms/artifactory-rpms.repo -O jfrog-artifactory-rpms.repo;
 #sudo mv jfrog-artifactory-rpms.repo /etc/yum.repos.d/;
 #sudo yum update && sudo yum install jfrog-artifactory-oss
-
-- name: Download artifactory repo
+- name: Download Jfrog repo file
   ansible.builtin.get_url:
-    src: https://releases.jfrog.io/artifactory/artifactory-rpms/artifactory-rpms.repo
+    url: https://releases.jfrog.io/artifactory/artifactory-rpms/artifactory-rpms.repo
     dest: /etc/yum.repos.d/artifactory-rpms.repo
 
 - name: InstallJFrog artifactory

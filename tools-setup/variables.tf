@@ -24,5 +24,9 @@ variable "tools" {
           vm_size = "Standard_E2bds_v5"
           spot = false
         }*/
+        github-runner = {
+          vm_size = "Standard_B2als_v2"
+          spot = false
+        }
     } 
 }

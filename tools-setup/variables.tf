@@ -19,11 +19,11 @@ variable "tools" {
         /*github-runner = {
           vm_size = "Standard_D2ls_v5"
           spot = false
-        }*/
-        /*elk-stack = {
+        }
+        elk-stack = {
           vm_size = "Standard_E2bds_v5"
           spot = false
-        }*/
+        }
         sonarqube = {
           vm_size = "Standard_D2ls_v5"
           spot = false
@@ -31,6 +31,6 @@ variable "tools" {
         artifactory = {
           vm_size = "Standard_D2ls_v5"
           spot = false
-        }
+        }*/
     } 
 }

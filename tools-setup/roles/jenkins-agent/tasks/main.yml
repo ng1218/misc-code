@@ -8,6 +8,7 @@
 - name: Create jenkins user
   ansible.builtin.user:
     name: jenkins
+    password: $6$QFneCEnnmN033EgM$iGxFOmpqlzVzqclBsvPte10YThqYMWHemtOWyhqojFAtIsnSYYfv.U63TvDiQrdcoKAaNoGvV.S7.lI8yjF50
 
 - name: Create jenkins folder
   ansible.builtin.file:

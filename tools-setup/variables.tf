@@ -32,5 +32,9 @@ variable "tools" {
           vm_size = "Standard_D2ls_v5"
           spot = false
         }*/
+        jenkins = {
+          vm_size = "Standard_D2ls_v5"
+          spot = false
+        }
     } 
 }

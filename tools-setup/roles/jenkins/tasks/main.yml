@@ -1,0 +1,16 @@
+- name: Copy Jenkins repo file
+  ansible.builtin.template:
+    src: jenkins.repo
+    dest: /etc/yum.repos.d/jenkins.repo
+
+- name: Install required dependencies
+  ansible.builtin.dnf:
+    name:
+      - java-21-openjdk
+      - fontconfig
+
+- name: Install Jenkins
+  ansible.builtin.dnf:
+    name: jenkins
+    enabled: true
+    state: installed

@@ -13,4 +13,5 @@
 - name: Install Jenkins
   ansible.builtin.dnf:
     name: jenkins
+    enabled: true
     state: installed

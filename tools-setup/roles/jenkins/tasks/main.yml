@@ -14,3 +14,10 @@
   ansible.builtin.dnf:
     name: jenkins
     state: installed
+
+- name: Start Jenkins
+  ansible.builtin.systemd:
+    state: started
+    enabled: true
+
+

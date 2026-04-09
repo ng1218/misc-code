@@ -8,6 +8,7 @@
     name:
       - java-21-openjdk
       - fontconfig
+    state: installed
 
 - name: Install Jenkins
   ansible.builtin.dnf:

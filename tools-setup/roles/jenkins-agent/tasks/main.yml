@@ -5,6 +5,7 @@
       - fontconfig
       - python3.12-devel
       - python3.12-pip
+      - python-jenkins
     state: installed
 
 - name: Create jenkins user

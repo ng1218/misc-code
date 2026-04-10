@@ -3,6 +3,8 @@
     name:
       - java-21-openjdk
       - fontconfig
+      - python3.12-devel
+      - python3.12-pip
     state: installed
 
 - name: Create jenkins user
@@ -16,4 +18,10 @@
     state: directory
     owner: jenkins
     group: jenkins
+
+- name: Install ansible using pip
+  ansible.builtin.pip:
+    name: ansible
+    executable: pip3.12
+
 

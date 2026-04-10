@@ -5,7 +5,6 @@
       - fontconfig
       - python3.12-devel
       - python3.12-pip
-      - python-jenkins
     state: installed
 
 - name: Create jenkins user
@@ -22,7 +21,9 @@
 
 - name: Install ansible using pip
   ansible.builtin.pip:
-    name: ansible
+    name:
+      - ansible
+      - python-jenkins
     executable: pip3.12
 
 

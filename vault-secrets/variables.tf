@@ -49,9 +49,18 @@ variable "secret_values" {
               AZURE_TENANT = "a9c314e0-1e86-4d94-a505-62afc24fe8b7"
               AZURE_SUBSCRIPTION_ID = "ddffee8a-e239-4aa1-b7e0-b88ff5a2f9aa"
               AZURE_CLIENT_ID = "8768f208-196c-4d2d-b46a-c5f21196749b"
-              AZURE_SECRET = ""
+              #AZURE_SECRET = "Z~C8Q~OMNiNh-re8FWWa6mriAr9ji9wbavYeCcjk"
             }
           }
+
+        elk = {
+          username = "elastic"
+          #password = "K7el1tqmS*A8zshnh7gg"
+        }
+
+        sonarqube = {
+          sonar_token = "squ_758eec6635f852eb51630a9a02d84de2d806cbd2"
+        }
 
         github-runner = {
           secret_engine = "roboshop-infra"

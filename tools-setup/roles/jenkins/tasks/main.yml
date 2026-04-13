@@ -27,6 +27,41 @@
       [Service]
       Environment="JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"
 
+- name: Create Jenkins init script directory
+  ansible.builtin.file:
+    path: /var/lib/jenkins/init.groovy.d
+    state: directory
+    owner: azuser
+    group: azuser
+    mode: '0755'
+
+- name: Create initial admin user via Init Script
+  ansible.builtin.copy:
+    dest: /var/lib/jenkins/init.groovy.d/basic-security.groovy
+    owner: azuser
+    group: azuser
+    mode: '0644'
+    content: |
+      import jenkins.model.*
+      import hudson.security.*
+      import jenkins.install.*
+
+      def instance = Jenkins.getInstance()
+
+      // Define the user and security realm
+      def hudsonRealm = new HudsonPrivateSecurityRealm(false)
+      hudsonRealm.createAccount("admin", "admin")
+      instance.setSecurityRealm(hudsonRealm)
+
+      // Grant full control and mark setup as complete
+      def strategy = new FullControlOnceLoggedInAuthorizationStrategy()
+      instance.setAuthorizationStrategy(strategy)
+      
+      // Crucial: Mark the install as finished to avoid further setup blocks
+      InstallState.INITIAL_SETUP_COMPLETED.initializeState()
+      
+      instance.save()
+
 - name: Start Jenkins
   ansible.builtin.systemd_service:
     name: jenkins
@@ -40,27 +75,6 @@
     delay: 10        # Wait 10 seconds before starting to check
     timeout: 300     # Stop trying after 5 minutes
     state: started
-
-- name: Create initial admin user
-  community.general.jenkins_script:
-    url: "http://jenkins.nareshdevops1218.online:8080"
-    script: |
-      import jenkins.model.*
-      import hudson.security.*
-
-      def instance = Jenkins.getInstance()
-      
-      // Define the user and security realm
-      def hudsonRealm = new HudsonPrivateSecurityRealm(false)
-      hudsonRealm.createAccount("admin", "admin")
-      instance.setSecurityRealm(hudsonRealm)
-
-      // Grant the user full admin permissions
-      def strategy = new FullControlOnceLoggedInAuthorizationStrategy()
-      instance.setAuthorizationStrategy(strategy)
-      
-      instance.save()
-
 
 - name: Install suggested plugins
   community.general.jenkins_plugin:

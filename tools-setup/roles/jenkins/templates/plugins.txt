@@ -1,3 +1,5 @@
 git:5.2.1
 workflow-aggregator:596.v8c21c963d92d
 configuration-as-code:1775.v810dc950b_514
+ssh-slaves
+credentials

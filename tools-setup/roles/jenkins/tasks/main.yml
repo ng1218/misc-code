@@ -30,15 +30,6 @@
     url: https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.14.0/jenkins-plugin-manager-2.14.0.jar
     dest: /tmp/jenkins-plugin-manager.jar
 
-- name: Install plugins
-  ansible.builtin.command: >
-    java -jar /tmp/jenkins-plugin-manager.jar
-    --plugin-file /tmp/plugins.txt
-    --plugin-dir /var/lib/jenkins/plugins
-    --resolve-dependencies
-  args:
-    creates: /var/lib/jenkins/plugins/git.jpi
-
 - name: Copy JCasC config
   ansible.builtin.template:
     src: jenkins.yaml
@@ -66,6 +57,13 @@
       [Service]
       Environment="JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"
       Environment="CASC_JENKINS_CONFIG=/var/lib/jenkins/jenkins.yaml"
+
+- name: Install plugins
+  ansible.builtin.command: >
+    java -jar /tmp/jenkins-plugin-manager.jar
+    --plugin-file /tmp/plugins.txt
+    --plugin-dir /var/lib/jenkins/plugins
+    --resolve-dependencies
 
 - name: Start Jenkins
   ansible.builtin.systemd_service:

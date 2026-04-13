@@ -21,7 +21,7 @@
     state: stopped
 
 - name: Copy plugin list
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: plugins.txt
     dest: /tmp/plugins.txt
 
@@ -40,7 +40,7 @@
     creates: /var/lib/jenkins/plugins/git.jpi
 
 - name: Copy JCasC config
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: jenkins.yaml
     dest: /var/lib/jenkins/jenkins.yaml
     owner: jenkins

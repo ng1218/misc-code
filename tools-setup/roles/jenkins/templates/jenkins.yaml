@@ -11,7 +11,7 @@ credentials:
 jenkins:
   systemMessage: "Managed by Ansible"
 
-  numExecutors: 2
+  numExecutors: 0
 
   securityRealm:
     local:

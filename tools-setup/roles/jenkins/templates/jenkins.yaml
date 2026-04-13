@@ -1,0 +1,38 @@
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              scope: GLOBAL
+              id: "agent-ssh-key"
+              username: "jenkins"
+              password: "devops@12345"
+              description: "Username/password credential"
+jenkins:
+  systemMessage: "Managed by Ansible"
+
+  numExecutors: 2
+
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: admin
+          password: admin123
+
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+
+  nodes:
+      - permanent:
+          name: "rhel-ssh-agent"
+          remoteFS: "/home/jenkins"
+          numExecutors: 5
+          labelString: "myfirstagent"
+          launcher:
+            ssh:
+              host: "jenkins-agent.nareshdevops1218.online"
+              port: 22
+              credentialsId: "agent-ssh-key"
+

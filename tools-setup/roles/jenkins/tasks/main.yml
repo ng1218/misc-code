@@ -15,6 +15,43 @@
     name: jenkins
     state: installed
 
+- name: Ensure Jenkins is stopped before plugin installation
+  ansible.builtin.systemd:
+    name: jenkins
+    state: stopped
+
+- name: Copy plugin list
+  ansible.builtin.copy:
+    src: plugins.txt
+    dest: /tmp/plugins.txt
+
+- name: Download plugin CLI
+  ansible.builtin.get_url:
+    url: https://github.com/jenkinsci/plugin-installation-manager-tool/releases/latest/download/jenkins-plugin-manager.jar
+    dest: /tmp/jenkins-plugin-manager.jar
+
+- name: Install plugins
+  ansible.builtin.command: >
+    java -jar /tmp/jenkins-plugin-manager.jar
+    --plugin-file /tmp/plugins.txt
+    --plugin-dir /var/lib/jenkins/plugins
+    --resolve-dependencies
+  args:
+    creates: /var/lib/jenkins/plugins/git.jpi
+
+- name: Copy JCasC config
+  ansible.builtin.copy:
+    src: jenkins.yaml
+    dest: /var/lib/jenkins/jenkins.yaml
+    owner: jenkins
+    group: jenkins
+    mode: '0644'
+
+- name: Set JCasC environment variable
+  ansible.builtin.lineinfile:
+    path: /etc/sysconfig/jenkins
+    line: 'CASC_JENKINS_CONFIG=/var/lib/jenkins/jenkins.yaml'
+
 - name: Bypass Setup Wizard (Systemd Override)
   ansible.builtin.file:
     path: /etc/systemd/system/jenkins.service.d
@@ -26,41 +63,6 @@
     content: |
       [Service]
       Environment="JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"
-
-- name: Create Jenkins init script directory
-  ansible.builtin.file:
-    path: /var/lib/jenkins/init.groovy.d
-    state: directory
-    owner: azuser
-    group: azuser
-    mode: '0755'
-
-- name: Create initial admin user via Init Script
-  ansible.builtin.copy:
-    dest: /var/lib/jenkins/init.groovy.d/basic-security.groovy
-    owner: azuser
-    group: azuser
-    mode: '0644'
-    content: |
-      import jenkins.model.*
-      import hudson.security.*
-      import jenkins.install.*
-
-      def instance = Jenkins.getInstance()
-
-      // Define the user and security realm
-      def hudsonRealm = new HudsonPrivateSecurityRealm(false)
-      hudsonRealm.createAccount("admin", "admin")
-      instance.setSecurityRealm(hudsonRealm)
-
-      // Grant full control and mark setup as complete
-      def strategy = new FullControlOnceLoggedInAuthorizationStrategy()
-      instance.setAuthorizationStrategy(strategy)
-      
-      // Crucial: Mark the install as finished to avoid further setup blocks
-      InstallState.INITIAL_SETUP_COMPLETED.initializeState()
-      
-      instance.save()
 
 - name: Start Jenkins
   ansible.builtin.systemd_service:
@@ -75,45 +77,3 @@
     delay: 10        # Wait 10 seconds before starting to check
     timeout: 300     # Stop trying after 5 minutes
     state: started
-
-- name: Install suggested plugins
-  community.general.jenkins_plugin:
-    name: "{{ item }}"
-    url: "http://jenkins.nareshdevops1218.online:8080"
-    url_username: "admin"
-    url_password: "admin"
-    state: present
-  loop:
-    - git
-    - workflow-aggregator
-    - ssh-slaves
-    - credentials-binding
-  register: plugin_result
-  until: plugin_result is success
-  retries: 3
-  delay: 10
-
-- name: Add SSH Private Key Credential
-  community.general.jenkins_credential:
-    url: "http://jenkins.nareshdevops1218.online:8080"
-    jenkins_user: "admin"
-    jenkins_password: "admin"
-    name: "agent-ssh-key"
-    cls: "com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl"
-    username: "jenkins"
-    password: "devops@12345"
-    state: present
-
-- name: Create SSH Agent Node
-  community.general.jenkins_node:
-    url: "http://jenkins.nareshdevops1218.online:8080"
-    user: "admin"
-    password: "admin"
-    name: "rhel-ssh-agent"
-    remote_fs: "/home/jenkins"
-    launcher: "ssh"
-    host: "jenkins-agent.nareshdevops1218.online:8080"
-    credentials_id: "agent-ssh-key"
-    num_executors: 5
-    labels: myfirstagent
-    state: present

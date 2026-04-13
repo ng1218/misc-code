@@ -47,11 +47,6 @@
     group: jenkins
     mode: '0644'
 
-- name: Set JCasC environment variable
-  ansible.builtin.lineinfile:
-    path: /etc/sysconfig/jenkins
-    line: 'CASC_JENKINS_CONFIG=/var/lib/jenkins/jenkins.yaml'
-
 - name: Bypass Setup Wizard (Systemd Override)
   ansible.builtin.file:
     path: /etc/systemd/system/jenkins.service.d

@@ -38,8 +38,9 @@
   community.general.jenkins_plugin:
     name: "{{ item }}"
     url: "http://jenkins.nareshdevops1218.online:8080"
-    user: "admin"
-    password: "admin"
+    url_username: "admin"
+    url_password: "admin"
+    state: present
   loop:
     - git
     - workflow-aggregator

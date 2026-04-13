@@ -36,3 +36,28 @@ jenkins:
               port: 22
               credentialsId: "agent-ssh-key"
 
+jobs:
+  - script: >
+      job('seed-job') {
+        description('Seed job created via JCasC')
+
+        scm {
+          git {
+            remote {
+              url('https://github.com/nareshgdevops/jenkins')
+            }
+            branch('main')
+          }
+        }
+
+        triggers {
+          scm('H H * * *')
+        }
+
+        steps {
+          shell('''
+            cd seed-job
+            make
+          ''')
+        }
+      }

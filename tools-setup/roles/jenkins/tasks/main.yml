@@ -27,7 +27,7 @@
 
 - name: Download plugin CLI
   ansible.builtin.get_url:
-    url: https://github.com/jenkinsci/plugin-installation-manager-tool/releases/latest/download/jenkins-plugin-manager.jar
+    url: https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.14.0/jenkins-plugin-manager-2.14.0.jar
     dest: /tmp/jenkins-plugin-manager.jar
 
 - name: Install plugins

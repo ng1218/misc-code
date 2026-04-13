@@ -34,6 +34,27 @@
     enabled: true
     daemon_reload: true
 
+- name: Create initial admin user
+  community.general.jenkins_script:
+    url: "http://jenkins.nareshdevops1218.online:8080"
+    script: |
+      import jenkins.model.*
+      import hudson.security.*
+
+      def instance = Jenkins.getInstance()
+      
+      // Define the user and security realm
+      def hudsonRealm = new HudsonPrivateSecurityRealm(false)
+      hudsonRealm.createAccount("admin", "admin")
+      instance.setSecurityRealm(hudsonRealm)
+
+      // Grant the user full admin permissions
+      def strategy = new FullControlOnceLoggedInAuthorizationStrategy()
+      instance.setAuthorizationStrategy(strategy)
+      
+      instance.save()
+
+
 - name: Install suggested plugins
   community.general.jenkins_plugin:
     name: "{{ item }}"

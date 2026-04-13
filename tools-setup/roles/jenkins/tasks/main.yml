@@ -59,6 +59,14 @@
       [Service]
       Environment="JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"
 
+- name: Set JCasC environment variable (systemd override)
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/jenkins.service.d/override.conf
+    content: |
+      [Service]
+      Environment="JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"
+      Environment="CASC_JENKINS_CONFIG=/var/lib/jenkins/jenkins.yaml"
+
 - name: Start Jenkins
   ansible.builtin.systemd_service:
     name: jenkins

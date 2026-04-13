@@ -12,11 +12,11 @@ variable "location" {
 
 variable "tools" {
     default = {
-        vault = {
+        /*vault = {
             vm_size = "Standard_B2als_v2"
             spot = true
         }
-        /*github-runner = {
+        github-runner = {
           vm_size = "Standard_D2ls_v5"
           spot = false
         }
@@ -31,7 +31,7 @@ variable "tools" {
         artifactory = {
           vm_size = "Standard_D2ls_v5"
           spot = false
-        }*/
+        }
         jenkins = {
           vm_size = "Standard_D2ls_v5"
           spot = false
@@ -39,6 +39,6 @@ variable "tools" {
         jenkins-agent = {
           vm_size = "Standard_D2ls_v5"
           spot = false
-        }
+        }*/
     } 
 }

@@ -31,6 +31,12 @@
     url: https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.14.0/jenkins-plugin-manager-2.14.0.jar
     dest: /tmp/jenkins-plugin-manager.jar
 
+- name: Install plugins
+  ansible.builtin.command: >
+    java -jar /tmp/jenkins-plugin-manager.jar
+    --plugin-file /tmp/plugins.txt
+    --plugin-download-directory /var/lib/jenkins/plugins
+
 - name: Copy JCasC config
   ansible.builtin.template:
     src: jenkins.yaml
@@ -52,12 +58,6 @@
       Environment="JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"
       Environment="CASC_JENKINS_CONFIG=/var/lib/jenkins/jenkins.yaml"
 
-- name: Install plugins
-  ansible.builtin.command: >
-    java -jar /tmp/jenkins-plugin-manager.jar
-    --plugin-file /tmp/plugins.txt
-    --plugin-download-directory /var/lib/jenkins/plugins
-
 - name: Reload systemd manager (required for env changes)
   ansible.builtin.command: systemctl daemon-reexec
 
@@ -70,19 +70,3 @@
     name: jenkins
     state: restarted
     enabled: true
-
-- name: Wait for Jenkins to be ready on port 8080
-  ansible.builtin.wait_for:
-    port: 8080
-    delay: 10        # Wait 10 seconds before starting to check
-    timeout: 300     # Stop trying after 5 minutes
-    state: started
-
-- name: Force JCasC reload via script API
-  ansible.builtin.uri:
-    url: "http://jenkins.nareshdevops1218.online:8080/reload-configuration-as-code"
-    method: POST
-    user: admin
-    password: admin
-    force_basic_auth: true
-    status_code: [ 200, 201, 302, 204 ]

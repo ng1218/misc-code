@@ -67,12 +67,15 @@
 - name: Reload systemd manager (required for env changes)
   ansible.builtin.command: systemctl daemon-reexec
 
-- name: Start Jenkins
-  ansible.builtin.systemd_service:
+- name: Reload systemd units
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Restart Jenkins
+  ansible.builtin.systemd:
     name: jenkins
     state: restarted
     enabled: true
-    daemon_reload: true
 
 - name: Wait for Jenkins to be ready on port 8080
   ansible.builtin.wait_for:

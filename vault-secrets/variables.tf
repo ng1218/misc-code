@@ -54,12 +54,18 @@ variable "secret_values" {
           }
 
         elk = {
-          username = "elastic"
-          #password = "K7el1tqmS*A8zshnh7gg"
+          secret_engine = "roboshop-infra"
+          secret_values = {
+            username = "elastic"
+            #password = "K7el1tqmS*A8zshnh7gg"
+          }
         }
 
         sonarqube = {
-          sonar_token = "squ_758eec6635f852eb51630a9a02d84de2d806cbd2"
+          secret_engine = "roboshop-infra"
+          secret_values = {
+            sonar_token = "squ_758eec6635f852eb51630a9a02d84de2d806cbd2"
+          }
         }
 
         github-runner = {

@@ -64,12 +64,14 @@
     --plugin-file /tmp/plugins.txt
     --plugin-download-directory /var/lib/jenkins/plugins
 
+- name: Reload systemd manager (required for env changes)
+  ansible.builtin.command: systemctl daemon-reexec
+
 - name: Start Jenkins
   ansible.builtin.systemd_service:
     name: jenkins
     state: restarted
     enabled: true
-    daemon-reexec: true
     daemon_reload: true
 
 - name: Wait for Jenkins to be ready on port 8080

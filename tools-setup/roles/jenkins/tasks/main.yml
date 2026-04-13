@@ -69,6 +69,7 @@
     name: jenkins
     state: restarted
     enabled: true
+    daemon-reexec: true
     daemon_reload: true
 
 - name: Wait for Jenkins to be ready on port 8080

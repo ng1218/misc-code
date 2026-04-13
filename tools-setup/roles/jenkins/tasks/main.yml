@@ -18,6 +18,7 @@
 - name: Ensure Jenkins is stopped before plugin installation
   ansible.builtin.systemd:
     name: jenkins
+    enabled: false
     state: stopped
 
 - name: Copy plugin list
@@ -43,14 +44,7 @@
     path: /etc/systemd/system/jenkins.service.d
     state: directory
 
-- name: Set JAVA_OPTS to skip wizard
-  ansible.builtin.copy:
-    dest: /etc/systemd/system/jenkins.service.d/override.conf
-    content: |
-      [Service]
-      Environment="JAVA_OPTS=-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"
-
-- name: Set JCasC environment variable (systemd override)
+- name: Set Jenkins systemd override
   ansible.builtin.copy:
     dest: /etc/systemd/system/jenkins.service.d/override.conf
     content: |

@@ -88,6 +88,10 @@
     - workflow-aggregator
     - ssh-slaves
     - credentials-binding
+  register: plugin_result
+  until: plugin_result is success
+  retries: 3
+  delay: 10
 
 - name: Add SSH Private Key Credential
   community.general.jenkins_credential:

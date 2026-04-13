@@ -77,3 +77,14 @@
     delay: 10        # Wait 10 seconds before starting to check
     timeout: 300     # Stop trying after 5 minutes
     state: started
+
+- name: Force JCasC reload via script API
+  ansible.builtin.uri:
+    url: "http://jenkins.nareshdevops1218.online:8080/scriptText"
+    method: POST
+    user: admin
+    password: admin
+    force_basic_auth: true
+    body: |
+      Jenkins.instance.reload()
+    body_format: form-urlencoded

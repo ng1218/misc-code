@@ -1,4 +1,5 @@
 git
+job-dsl
 workflow-aggregator
 configuration-as-code
 ssh-slaves

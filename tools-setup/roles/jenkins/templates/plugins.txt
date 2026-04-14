@@ -4,3 +4,5 @@ workflow-aggregator
 configuration-as-code
 ssh-slaves
 credentials
+blueocean
+ansicolor

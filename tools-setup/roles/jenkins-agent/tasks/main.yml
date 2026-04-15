@@ -5,6 +5,8 @@
       - fontconfig
       - python3.12-devel
       - python3.12-pip
+      - maven
+      - nodejs
     state: installed
 
 - name: Create jenkins user

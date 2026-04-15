@@ -36,4 +36,11 @@
     name: docker-ce
     state: installed
 
+- name: Enable and start app service
+  ansible.builtin.systemd_service:
+    name: docker
+    state: restarted
+    enabled: true
+    daemon_reload: true
+
 
